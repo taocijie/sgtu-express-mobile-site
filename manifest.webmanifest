@@ -1,0 +1,19 @@
+{
+  "name": "工技大校园快递代取",
+  "short_name": "工技大代取",
+  "description": "上海工程技术大学校园快递代取接单平台",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f8",
+  "theme_color": "#07c160",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
