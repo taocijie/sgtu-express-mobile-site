@@ -4,6 +4,10 @@
 
 如果要发给其他人手机测评，请把本目录上传到 GitHub Pages、Render Static Site、Vercel、Netlify 或服务器静态目录。不要发送 `127.0.0.1` 地址，因为它只代表你自己的电脑。
 
+当前测试地址：
+
+https://taocijie.github.io/sgtu-express-mobile-site/
+
 ## 演示账号
 
 - 超级管理员：`13800000000`
