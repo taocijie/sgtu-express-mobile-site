@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07c160" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="工技大代取" />
+    <meta
+      name="description"
+      content="上海工程技术大学校园快递代取接单平台，支持发布订单、接单配送和后台管理。"
+    />
+    <title>工技大快递代取</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./icon.svg" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">上海工程技术大学</p>
+          <h1>校园快递代取</h1>
+        </div>
+        <button id="adminEntry" class="icon-btn" title="管理后台" type="button">管</button>
+      </header>
+
+      <section id="entryView" class="entry-view">
+        <button class="entry-card" data-entry="publisher" type="button">
+          <span>取件</span>
+          <strong>发布代取订单</strong>
+        </button>
+        <button class="entry-card" data-entry="runner" type="button">
+          <span>接单</span>
+          <strong>认证后配送</strong>
+        </button>
+      </section>
+
+      <section id="loginView" class="panel hidden">
+        <button id="backToEntry" class="text-btn" type="button">返回入口</button>
+        <h2 id="loginTitle">登录</h2>
+        <form id="loginForm" class="form">
+          <label>
+            手机号
+            <input id="loginPhone" required inputmode="tel" maxlength="11" placeholder="请输入手机号" />
+          </label>
+          <label>
+            密码
+            <input id="loginPassword" required minlength="6" type="password" placeholder="至少 6 位" />
+          </label>
+          <button class="primary-btn" type="submit">登录 / 自动注册</button>
+        </form>
+        <p class="hint" id="loginHint"></p>
+      </section>
+
+      <section id="mainView" class="hidden">
+        <div class="userbar">
+          <span id="userBadge"></span>
+          <button id="logoutBtn" class="text-btn" type="button">退出</button>
+        </div>
+
+        <nav id="tabs" class="tabs"></nav>
+
+        <section id="publisherCreate" class="tab-page hidden">
+          <form id="orderForm" class="form">
+            <label>取件地址<input id="pickupAddress" required placeholder="如：三期宿舍14号楼" /></label>
+            <label>取件码<input id="pickupCode" required placeholder="快递取件密码" /></label>
+            <label>送达地址<input id="deliveryAddress" required placeholder="如：教学楼A座" /></label>
+            <label>快递编号<input id="trackingNo" required placeholder="快递单号" /></label>
+            <label>重量（kg）<input id="weight" required min="0.1" step="0.1" type="number" placeholder="0.5" /></label>
+            <label>备注<textarea id="note" rows="3" placeholder="可选"></textarea></label>
+            <div id="pricePreview" class="price-preview">填写重量后自动计算价格</div>
+            <div class="price-table">
+              <span>0-0.5kg ¥2</span><span>0.5-1kg ¥4</span><span>1-2kg ¥6</span>
+              <span>2-5kg ¥10</span><span>超 5kg：¥10 + 超出 × ¥2/kg</span>
+            </div>
+            <button class="primary-btn" type="submit">发布订单</button>
+          </form>
+        </section>
+
+        <section id="publisherOrders" class="tab-page hidden">
+          <div id="myOrders" class="list"></div>
+        </section>
+
+        <section id="runnerAvailable" class="tab-page hidden">
+          <div id="authCard" class="panel compact"></div>
+          <div id="availableOrders" class="list"></div>
+        </section>
+
+        <section id="runnerMine" class="tab-page hidden">
+          <div id="runnerStats" class="stats-strip"></div>
+          <div id="runnerOrders" class="list"></div>
+        </section>
+
+        <section id="adminDashboard" class="tab-page hidden">
+          <div id="dashboardStats" class="dashboard-grid"></div>
+        </section>
+
+        <section id="adminAuth" class="tab-page hidden">
+          <div id="authRequests" class="list"></div>
+        </section>
+
+        <section id="adminOrders" class="tab-page hidden">
+          <div id="allOrders" class="list"></div>
+        </section>
+
+        <section id="adminUsers" class="tab-page hidden">
+          <div id="allUsers" class="list"></div>
+        </section>
+      </section>
+
+      <div id="toast" class="toast hidden"></div>
+    </main>
+
+    <dialog id="modal">
+      <form method="dialog" class="modal-card">
+        <h3 id="modalTitle"></h3>
+        <div id="modalBody"></div>
+        <menu>
+          <button value="cancel" class="text-btn">取消</button>
+          <button id="modalConfirm" value="confirm" class="primary-btn">确定</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="./app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator && location.protocol !== "file:") {
+        navigator.serviceWorker.register("./service-worker.js");
+      }
+    </script>
+  </body>
+</html>
